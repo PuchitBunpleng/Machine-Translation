@@ -7,6 +7,7 @@ frame.geometry('400x200')
 # Function for getting Input 
 # from textbox and printing it 
 # at label widget 
+# ควย <--- อิฐมันเขียนครับ
 
 def printInput(): 
 	inp = inputtxt.get(1.0, "end-1c") 
