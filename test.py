@@ -6,8 +6,7 @@ frame.title("TextBox Input")
 frame.geometry('400x200') 
 # Function for getting Input 
 # from textbox and printing it 
-# at label widget 
-# ควย <--- อิฐมันเขียนครับ
+# at label widget
 
 def printInput(): 
 	inp = inputtxt.get(1.0, "end-1c") 
