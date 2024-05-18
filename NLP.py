@@ -1,4 +1,5 @@
 from tkinter import *
+from idlelib.tooltip import Hovertip
 
 
 # Change Here
@@ -51,22 +52,23 @@ root = Tk()
 root.title('Capstone Project')
 root.minsize(800, 600)
 root.geometry('800x600')
+root.configure(bg='#DBEEFC')
 frame = Frame(root)
 frame.pack()
 
 curLang = 'Thai'
 
 # Banner
-Label(root, text='Machine Translation Application', font=('JetBrains Mono', 32), bg='#17acff')\
+Label(root, text='Machine Translation Application', font=('JetBrains Mono', 32), bg='#17ACFF')\
     .place(x=0, y=0, width=800, height=90)
 
 # Input Label
-langLabel = Label(root, text='Thai:', font=('JetBrains Mono', 20), anchor=W)
+langLabel = Label(root, text='Thai:', font=('JetBrains Mono', 20), anchor=W, bg='#DBEEFC')
 langLabel.place(x=70, y=134, width=96, height=26)
 
 # Input Flag
 thaiFlag = PhotoImage(file='ThaiFlag.png').subsample(12, 12)
-inFlag = Label(root, image=thaiFlag)
+inFlag = Label(root, image=thaiFlag, bg='#DBEEFC')
 inFlag.place(x=690, y=130, width=40, height=40)
 
 # Input Textbox
@@ -78,24 +80,25 @@ scroll1.config(command=inText.yview)
 scroll1.pack(side=RIGHT, fill=Y)
 
 # Translate Button
-transB = Button(root, text='Translate', bg='#17acff', font=('JetBrains Mono', 20), command=translate)
+transB = Button(root, text='Translate', bg='#17ACFF', font=('JetBrains Mono', 20), command=translate)
 transB.place(x=264, y=315, width=200, height=44)
 
 # Swap Language Button
 swapICO = PhotoImage(file='Swap.png').subsample(21, 21)
 swapB = Button(root, image=swapICO, command=swapLang)
 swapB.place(x=494, y=315, width=44, height=44)
+Hovertip(swapB, 'Change Language')
 
 # Output Label
-Label(root, text='Translated:', font=('JetBrains Mono', 20)).place(x=70, y=359, width=132, height=26)
+Label(root, text='Translated:', font=('JetBrains Mono', 20), bg='#DBEEFC').place(x=70, y=359, width=132, height=26)
 
 # Output Flag
 engFlag = PhotoImage(file='EngFlag.png').subsample(13, 13)
-outFlag = Label(root, image=engFlag)
+outFlag = Label(root, image=engFlag, bg='#DBEEFC')
 outFlag.place(x=690, y=355, width=40, height=40)
 
 # Output Textbox
-outText = Text(root, font=('JetBrains Mono', 14))
+outText = Text(root, font=('JetBrains Mono', 14), state='disabled')
 scroll2 = Scrollbar(outText)
 outText.configure(yscrollcommand=scroll2.set)
 outText.place(x=70, y=395, width=660, height=125)
