@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 from idlelib.tooltip import Hovertip
 
 
@@ -14,7 +15,16 @@ def EngToThai(eng):
     return thai
 
 
+# use for get model name
+def getModel():
+    if modelCombo.current() == 0:
+        return 'Transformer'
+    elif modelCombo.current() == 1:
+        return 'mBART'
+
+
 def swapLang():
+    print(getModel())
     global curLang
     inText.delete('1.0', END)
     outputText = outText.get(1.0, "end-1c")
@@ -61,6 +71,16 @@ curLang = 'Thai'
 # Banner
 Label(root, text='Machine Translation Application', font=('JetBrains Mono', 32), bg='#17ACFF')\
     .place(x=0, y=0, width=800, height=90)
+
+# Model Selection Text
+Label(root, text='Model:', font=('JetBrains Mono', 16), bg='#DBEEFC').place(x=271, y=118, width=58, height=21)
+
+# Model Selection Combobox
+modelStr = StringVar()
+modelCombo = ttk.Combobox(root, textvariable=modelStr, font=('JetBrains Mono', 16))
+modelCombo['values'] = ('Transformer', 'mBART')
+modelCombo.place(x=338, y=110, width=182, height=40)
+modelCombo.current(0)
 
 # Input Label
 langLabel = Label(root, text='Thai:', font=('JetBrains Mono', 20), anchor=W, bg='#DBEEFC')
