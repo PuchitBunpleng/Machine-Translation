@@ -29,7 +29,9 @@ def swapLang():
     inText.delete('1.0', END)
     outputText = outText.get(1.0, "end-1c")
     inText.insert(INSERT, outputText)
+    outText.config(state=NORMAL)
     outText.delete('1.0', END)
+    outText.config(state=DISABLED)
     if curLang == 'Thai':
         langLabel.configure(text='English:')
         inFlag.configure(image=engFlag)
@@ -48,14 +50,18 @@ def translate():
     if inText.get(1.0, "end-1c"):
         outText.delete('1.0', END)
         inputText = inText.get(1.0, "end-1c")
+        outText.config(state=NORMAL)
         if curLang == 'Thai':
             translatedTextEng = ThaiToEng(inputText)
+            outText.delete('1.0', END)
             outText.insert(INSERT, translatedTextEng)
         elif curLang == 'Eng':
             translatedTextThai = EngToThai(inputText)
+            outText.delete('1.0', END)
             outText.insert(INSERT, translatedTextThai)
         else:
             print('Something Wrong')
+        outText.config(state=DISABLED)
 
 
 root = Tk()
@@ -87,7 +93,7 @@ langLabel = Label(root, text='Thai:', font=('JetBrains Mono', 20), anchor=W, bg=
 langLabel.place(x=70, y=134, width=96, height=26)
 
 # Input Flag
-thaiFlag = PhotoImage(file='ThaiFlag.png').subsample(12, 12)
+thaiFlag = PhotoImage(file='src/images/ThaiFlag.png').subsample(12, 12)
 inFlag = Label(root, image=thaiFlag, bg='#DBEEFC')
 inFlag.place(x=690, y=130, width=40, height=40)
 
@@ -104,7 +110,7 @@ transB = Button(root, text='Translate', bg='#17ACFF', font=('JetBrains Mono', 20
 transB.place(x=264, y=315, width=200, height=44)
 
 # Swap Language Button
-swapICO = PhotoImage(file='Swap.png').subsample(21, 21)
+swapICO = PhotoImage(file='src/images/Swap.png').subsample(21, 21)
 swapB = Button(root, image=swapICO, command=swapLang)
 swapB.place(x=494, y=315, width=44, height=44)
 Hovertip(swapB, 'Change Language')
@@ -113,7 +119,7 @@ Hovertip(swapB, 'Change Language')
 Label(root, text='Translated:', font=('JetBrains Mono', 20), bg='#DBEEFC').place(x=70, y=359, width=132, height=26)
 
 # Output Flag
-engFlag = PhotoImage(file='EngFlag.png').subsample(13, 13)
+engFlag = PhotoImage(file='src/images/EngFlag.png').subsample(13, 13)
 outFlag = Label(root, image=engFlag, bg='#DBEEFC')
 outFlag.place(x=690, y=355, width=40, height=40)
 
