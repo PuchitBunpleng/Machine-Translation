@@ -1,17 +1,31 @@
 from tkinter import *
 from tkinter import ttk
 from idlelib.tooltip import Hovertip
-
+import libs.TransformerMTL as tMTL
 
 # Change Here
 def ThaiToEng(thai):
     eng = thai + ' --> Thai to Eng'  # Change this Line
+    curModel = getModel()
+    if curModel == 'Transformer':
+        tMTL.TH2ENG_model()
+    elif curModel == 'mBART':
+        pass
+    else:
+        return '***AN ERROR OCCURS***'
     return eng
 
 
 # เปลี่ยนตรงนี้
 def EngToThai(eng):
     thai = eng + ' --> อังกฤษเป็นไทย'  # เปลี่ยนบรรทัดนี้
+    curModel = getModel()
+    if curModel == 'Transformer':
+        Transformer_ENG2TH_model.summary()
+    elif curModel == 'mBART':
+        mBART_TH2ENG_model.summary()
+    else:
+        return '***AN ERROR OCCURS***'
     return thai
 
 
@@ -43,7 +57,7 @@ def swapLang():
         outFlag.configure(image=engFlag)
         curLang = 'Thai'
     else:
-        print('Something Wrong')
+        print('***AN ERROR OCCURS***')
 
 
 def translate():
@@ -60,7 +74,7 @@ def translate():
             outText.delete('1.0', END)
             outText.insert(INSERT, translatedTextThai)
         else:
-            print('Something Wrong')
+            print('***AN ERROR OCCURS***')
         outText.config(state=DISABLED)
 
 
