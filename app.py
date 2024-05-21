@@ -1,15 +1,15 @@
 from tkinter import *
 from tkinter import ttk
 from idlelib.tooltip import Hovertip
-import libs.TransformerMTL as tMTL
+import libs.mBART2 as mBART2
 
 # Change Here
 def ThaiToEng(thai):
     eng = thai + ' --> Thai to Eng'  # Change this Line
     curModel = getModel()
-    if curModel == 'Transformer':
-        tMTL.TH2ENG_model()
-    elif curModel == 'mBART':
+    if curModel == 'mBART1':
+        pass
+    elif curModel == 'mBART2':
         pass
     else:
         return '***AN ERROR OCCURS***'
@@ -18,12 +18,12 @@ def ThaiToEng(thai):
 
 # เปลี่ยนตรงนี้
 def EngToThai(eng):
-    thai = eng + ' --> อังกฤษเป็นไทย'  # เปลี่ยนบรรทัดนี้
     curModel = getModel()
-    if curModel == 'Transformer':
-        Transformer_ENG2TH_model.summary()
-    elif curModel == 'mBART':
-        mBART_TH2ENG_model.summary()
+    thai = ''
+    if curModel == 'mBART1':
+        pass
+    elif curModel == 'mBART2':
+        thai = mBART2.en2th(eng)
     else:
         return '***AN ERROR OCCURS***'
     return thai
@@ -32,13 +32,12 @@ def EngToThai(eng):
 # use for get model name
 def getModel():
     if modelCombo.current() == 0:
-        return 'Transformer'
+        return 'mBART1'
     elif modelCombo.current() == 1:
-        return 'mBART'
+        return 'mBART2'
 
 
 def swapLang():
-    print(getModel())
     global curLang
     inText.delete('1.0', END)
     outputText = outText.get(1.0, "end-1c")
@@ -98,7 +97,7 @@ Label(root, text='Model:', font=('JetBrains Mono', 16), bg='#DBEEFC').place(x=27
 # Model Selection Combobox
 modelStr = StringVar()
 modelCombo = ttk.Combobox(root, textvariable=modelStr, font=('JetBrains Mono', 16))
-modelCombo['values'] = ('Transformer', 'mBART')
+modelCombo['values'] = ('mBART1', 'mBART2')
 modelCombo.place(x=338, y=110, width=182, height=40)
 modelCombo.current(0)
 
