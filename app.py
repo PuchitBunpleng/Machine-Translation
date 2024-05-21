@@ -1,16 +1,24 @@
 from tkinter import *
 from tkinter import ttk
 from idlelib.tooltip import Hovertip
+import libs.mBART1 as mBART1
 import libs.mBART2 as mBART2
+import os
+import sys
+
+if getattr(sys, 'frozen', False):
+    app_path = os.path.dirname(os.path.dirname(sys.executable))
+else:
+    app_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Change Here
 def ThaiToEng(thai):
-    eng = thai + ' --> Thai to Eng'  # Change this Line
+    eng = ''
     curModel = getModel()
     if curModel == 'mBART1':
-        pass
+        eng = mBART1.th2en(thai)
     elif curModel == 'mBART2':
-        pass
+        eng = mBART2.th2en(thai)
     else:
         return '***AN ERROR OCCURS***'
     return eng
@@ -21,7 +29,7 @@ def EngToThai(eng):
     curModel = getModel()
     thai = ''
     if curModel == 'mBART1':
-        pass
+        thai = mBART1.en2th(eng)
     elif curModel == 'mBART2':
         thai = mBART2.en2th(eng)
     else:
@@ -106,7 +114,7 @@ langLabel = Label(root, text='Thai:', font=('JetBrains Mono', 20), anchor=W, bg=
 langLabel.place(x=70, y=134, width=96, height=26)
 
 # Input Flag
-thaiFlag = PhotoImage(file='src/images/ThaiFlag.png').subsample(12, 12)
+thaiFlag = PhotoImage(file=os.path.join(app_path, 'src/images/ThaiFlag.png')).subsample(12, 12)
 inFlag = Label(root, image=thaiFlag, bg='#DBEEFC')
 inFlag.place(x=690, y=130, width=40, height=40)
 
@@ -123,7 +131,7 @@ transB = Button(root, text='Translate', bg='#17ACFF', font=('JetBrains Mono', 20
 transB.place(x=264, y=315, width=200, height=44)
 
 # Swap Language Button
-swapICO = PhotoImage(file='src/images/Swap.png').subsample(21, 21)
+swapICO = PhotoImage(file=os.path.join(app_path, 'src/images/Swap.png')).subsample(21, 21)
 swapB = Button(root, image=swapICO, command=swapLang)
 swapB.place(x=494, y=315, width=44, height=44)
 Hovertip(swapB, 'Change Language')
@@ -132,7 +140,7 @@ Hovertip(swapB, 'Change Language')
 Label(root, text='Translated:', font=('JetBrains Mono', 20), bg='#DBEEFC').place(x=70, y=359, width=132, height=26)
 
 # Output Flag
-engFlag = PhotoImage(file='src/images/EngFlag.png').subsample(13, 13)
+engFlag = PhotoImage(file=os.path.join(app_path, 'src/images/EngFlag.png')).subsample(13, 13)
 outFlag = Label(root, image=engFlag, bg='#DBEEFC')
 outFlag.place(x=690, y=355, width=40, height=40)
 
