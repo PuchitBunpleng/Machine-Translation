@@ -1,7 +1,8 @@
 from transformers import AutoTokenizer
 from optimum.onnxruntime import ORTModelForSeq2SeqLM
+import os
 
-model_path = "./src/models/mBART_Eng2Thai"
+model_path = os.path.join(os.getcwd(), "src/models/mBART_Eng2Thai")
 th2en_tokenizer = AutoTokenizer.from_pretrained(model_path)
 th2en_model = ORTModelForSeq2SeqLM.from_pretrained(model_path)
 
